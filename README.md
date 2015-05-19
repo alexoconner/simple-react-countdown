@@ -1,5 +1,7 @@
 # React Countdown Component #
 
+### Note: Still under construction, so better don't use it yet.. ;)
+
 ## Installation ##
 * pull repository (https://github.com/alexoconner/simple-react-countdown)
 * import the countdown.js into your app (e.g. as SimpleReactCountdown)
