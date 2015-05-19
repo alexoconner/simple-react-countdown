@@ -16,10 +16,18 @@ class SimpleReactCountdown extends React.Component {
             mins: '00',
             secs: '00'
         };
+
+        this.currTime = new Date().getTime();
+        this.startDate = Date.parse(this.props.startDate);
+        this.endDate = Date.parse(this.props.endDate);
     }
 
-    componentDidMount() {
-        this.countdown();
+    componentWillMount() {
+        this.countdownInit();
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.countdown);
     }
 
     addZero(val) {
@@ -29,36 +37,38 @@ class SimpleReactCountdown extends React.Component {
         return val;
     }
 
-    countdown() {
-        var currTime = Date.now();
-        var startDate = Date.parse(this.props.startDate);
-        var endDate = Date.parse(this.props.endDate);
-        var timeLeft = endDate - currTime;
-        var difference;
+    countdownInit() {
 
-        if ( startDate < endDate ) {
-            difference = endDate - startDate;
-        }
-        else {
+        if ( this.startDate > this.endDate ) {
             this.setState({
                 hide: true
             });
             throw new Error('Start date has to be smaller than end date.');
         }
 
-        if ( currTime > endDate && this.props.hideWhenFinished === true ) {
+        if ( this.currTime > this.endDate && this.props.hideWhenFinished === true ) {
             this.setState({
                 hide: true
             });
         }
+        else {
+            this.countdown();
+        }
 
-        if ( currTime < endDate ) {
+    }
+
+    countdown() {
+
+        this.currTime = new Date().getTime();
+        this.timeLeft = this.endDate - this.currTime;
+
+        if ( this.currTime < this.endDate ) {
 
             var leftOverTime = {
-                days: Math.floor( timeLeft / (1000*60*60*24) ),
-                hours: Math.floor( (timeLeft / (1000*60*60)) % 24 ),
-                mins: Math.floor( (timeLeft / (1000*60)) % 60 ),
-                secs: Math.floor( (timeLeft / 1000 ) % 60 )
+                days: Math.floor( this.timeLeft / (1000*60*60*24) ),
+                hours: Math.floor( (this.timeLeft / (1000*60*60)) % 24 ),
+                mins: Math.floor( (this.timeLeft / (1000*60)) % 60 ),
+                secs: Math.floor( (this.timeLeft / 1000 ) % 60 )
             };
 
             if ( this.props.showZero === true ) {
@@ -75,9 +85,8 @@ class SimpleReactCountdown extends React.Component {
                 secs: leftOverTime.secs
             });
 
+            setTimeout(this.countdown.bind(this), 1000);
         }
-
-        console.log(startDate, endDate, difference, currTime);
     }
 
     render() {
