@@ -1,0 +1,36 @@
+{
+  "name": "react-countdown",
+  "version": "1.0.0",
+  "description": "Simple React Countdown",
+  "main": "countdown.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexoconner/simple-react-countdown.git"
+  },
+  "keywords": [
+    "react",
+    "countdown",
+    "javascript",
+    "es6",
+    "reactjs"
+  ],
+  "author": "Alexander Skrabl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexoconner/simple-react-countdown/issues"
+  },
+  "homepage": "https://github.com/alexoconner/simple-react-countdown",
+  "devDependencies": {
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.3",
+    "fs": "0.0.2",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
+    "gulp-rename": "^1.2.2",
+    "react": "^0.13.3",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
